@@ -4,7 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name="day-01-1"
+name="d01"
 path = "day-01/main.rs"
+
+[[bin]]
+name="d02"
+path = "day-02/main.rs"
 
 [dependencies]
