@@ -1,13 +1,13 @@
 type Line = Vec<i32>;
 
-fn part1(input: &str) -> usize {
+pub fn part1(input: &str) -> usize {
     input
         .lines()
         .filter(|line| is_safe(&parse_line(line)))
         .count()
 }
 
-fn part2(input: &str) -> usize {
+pub fn part2(input: &str) -> usize {
     input
         .lines()
         .filter(|line| is_safe_with_fault_tolerance(&parse_line(line)))

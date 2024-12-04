@@ -1,6 +1,6 @@
 use regex::{Match, Regex};
 
-fn part1(input: &str) -> i64 {
+pub fn part1(input: &str) -> i64 {
     let re: Regex = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
     re.captures_iter(input)
@@ -11,7 +11,7 @@ fn part1(input: &str) -> i64 {
         .sum()
 }
 
-fn part2(input: &str) -> i64 {
+pub fn part2(input: &str) -> i64 {
     let re: Regex = Regex::new(r"(mul\((\d+),(\d+)\)|do\(\)|don't\(\))").unwrap();
 
     let mut do_we_do = true;

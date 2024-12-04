@@ -9,7 +9,7 @@ impl CoordinatePair {
     }
 }
 
-fn part1(input: &str) -> usize {
+pub fn part1(input: &str) -> usize {
     let puzzle = parse_wordsearch(input);
 
     locate_char('X', &puzzle)
@@ -89,7 +89,7 @@ fn parse_wordsearch(input: &str) -> WordSearch {
     input.lines().map(|line| line.chars().collect()).collect()
 }
 
-fn part2(input: &str) -> usize {
+pub fn part2(input: &str) -> usize {
     let puzzle = parse_wordsearch(input);
 
     locate_char('A', &puzzle)

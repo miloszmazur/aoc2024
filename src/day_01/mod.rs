@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn part1(input: &str) -> usize {
+pub fn part1(input: &str) -> usize {
     let mut g1_locs: Vec<usize> = Vec::new();
     let mut g2_locs: Vec<usize> = Vec::new();
     for line in input.lines() {
@@ -17,7 +17,7 @@ fn part1(input: &str) -> usize {
         .sum()
 }
 
-fn part2(input: &str) -> usize {
+pub fn part2(input: &str) -> usize {
     let mut g1_locs: Vec<usize> = Vec::new();
     let mut g2_locs: Vec<usize> = Vec::new();
     for line in input.lines() {

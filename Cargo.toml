@@ -5,19 +5,27 @@ edition = "2021"
 
 [[bin]]
 name = "d01"
-path = "day_01/main.rs"
+path = "src/bin/day_01.rs"
 
 [[bin]]
 name = "d02"
-path = "day_02/main.rs"
+path = "src/bin/day_02.rs"
 
 [[bin]]
 name = "d03"
-path = "day_03/main.rs"
+path = "src/bin/day_03.rs"
 
 [[bin]]
 name = "d04"
-path = "day_04/main.rs"
+path = "src/bin/day_04.rs"
+
+[[bench]]
+name = "benchmarks"
+harness = false
+path = "benches/benchmarks.rs"
 
 [dependencies]
 regex = "1.11.1"
+
+[dev-dependencies]
+divan = "0.1.16"
