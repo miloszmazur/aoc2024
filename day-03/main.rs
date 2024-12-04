@@ -1,5 +1,3 @@
-use std::error::Error;
-
 use regex::{Match, Regex};
 
 fn part1(input: &str) -> i64 {
@@ -33,8 +31,8 @@ fn part2(input: &str) -> i64 {
                 _ => {
                     if do_we_do {
                         let (mul_left, mul_right) = (
-                            getI64Value(capture.get(2)).unwrap(),
-                            getI64Value(capture.get(3)).unwrap()
+                            get_i64_value(capture.get(2)).unwrap(),
+                            get_i64_value(capture.get(3)).unwrap(),
                         );
                         mul_left * mul_right
                     } else {
@@ -50,12 +48,12 @@ fn part2(input: &str) -> i64 {
     sum
 }
 
-fn getI64Value(asd: Option<Match>) -> Option<i64> {
+fn get_i64_value(asd: Option<Match>) -> Option<i64> {
     asd?.as_str().parse::<i64>().ok()
 }
 
 fn main() {
-    let input = include_str!("input-mati.txt");
+    let input = include_str!("input.txt");
     println!("p1");
     dbg!(part1(input));
     println!("p2");

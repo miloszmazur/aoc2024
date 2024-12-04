@@ -99,17 +99,6 @@ fn part2(input: &str) -> usize {
 }
 
 fn is_x_mas(puzzle: &WordSearch, coord: &CoordinatePair) -> bool {
-    let check_me: [CoordinatePair; 8] = [
-        CoordinatePair(-1, -1),
-        CoordinatePair(-1, 0),
-        CoordinatePair(-1, 1),
-        CoordinatePair(0, -1),
-        CoordinatePair(0, 1),
-        CoordinatePair(1, -1),
-        CoordinatePair(1, 0),
-        CoordinatePair(1, 1),
-    ];
-
     if coord.0 < 1
         || coord.1 < 1
         || coord.1 >= (puzzle.len() - 1) as i64
