@@ -44,14 +44,6 @@ fn is_safe_with_fault_tolerance(report: &Vec<i32>) -> bool {
         })
 }
 
-fn main() {
-    let input = include_str!("input.txt");
-    println!("p1");
-    dbg!(part1(input));
-    println!("p2");
-    dbg!(part2(input));
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

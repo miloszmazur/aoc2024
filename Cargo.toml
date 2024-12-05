@@ -5,19 +5,23 @@ edition = "2021"
 
 [[bin]]
 name = "d01"
-path = "src/bin/day_01.rs"
+path = "src/exec/day_01.rs"
 
 [[bin]]
 name = "d02"
-path = "src/bin/day_02.rs"
+path = "src/exec/day_02.rs"
 
 [[bin]]
 name = "d03"
-path = "src/bin/day_03.rs"
+path = "src/exec/day_03.rs"
 
 [[bin]]
 name = "d04"
-path = "src/bin/day_04.rs"
+path = "src/exec/day_04.rs"
+
+[[bin]]
+name = "d05"
+path = "src/exec/day_05.rs"
 
 [[bench]]
 name = "benchmarks"
@@ -25,6 +29,7 @@ harness = false
 path = "benches/benchmarks.rs"
 
 [dependencies]
+anyhow = "1.0.94"
 regex = "1.11.1"
 
 [dev-dependencies]

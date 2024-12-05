@@ -52,14 +52,6 @@ fn get_i64_value(asd: Option<Match>) -> Option<i64> {
     asd?.as_str().parse::<i64>().ok()
 }
 
-fn main() {
-    let input = include_str!("input.txt");
-    println!("p1");
-    dbg!(part1(input));
-    println!("p2");
-    dbg!(part2(input));
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

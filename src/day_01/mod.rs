@@ -45,14 +45,6 @@ pub fn part2(input: &str) -> usize {
         .sum()
 }
 
-fn main() {
-    let input = include_str!("input.txt");
-    println!("p1");
-    dbg!(part1(input));
-    println!("p2");
-    dbg!(part2(input));
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

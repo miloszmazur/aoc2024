@@ -121,14 +121,6 @@ fn is_x_mas(puzzle: &WordSearch, coord: &CoordinatePair) -> bool {
         && second_diagonal.contains(&'M') & second_diagonal.contains(&'S')
 }
 
-fn main() {
-    let input = include_str!("input.txt");
-    println!("p1");
-    dbg!(part1(input));
-    println!("p2");
-    dbg!(part2(input));
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
