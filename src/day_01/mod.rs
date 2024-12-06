@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
 pub fn part1(input: &str) -> usize {
     let mut g1_locs: Vec<usize> = Vec::new();
@@ -28,7 +28,7 @@ pub fn part2(input: &str) -> usize {
     g1_locs.sort();
     g2_locs.sort();
 
-    let mut location_frequency: HashMap<usize, usize> = HashMap::new();
+    let mut location_frequency: FxHashMap<usize, usize> = FxHashMap::default();
     for location_id in g2_locs {
         *location_frequency.entry(location_id).or_insert(0) += 1;
     }
