@@ -6,22 +6,27 @@ edition = "2021"
 [[bin]]
 name = "d01"
 path = "src/exec/day_01.rs"
+test = false
 
 [[bin]]
 name = "d02"
 path = "src/exec/day_02.rs"
+test = false
 
 [[bin]]
 name = "d03"
 path = "src/exec/day_03.rs"
+test = false
 
 [[bin]]
 name = "d04"
 path = "src/exec/day_04.rs"
+test = false
 
 [[bin]]
 name = "d05"
 path = "src/exec/day_05.rs"
+test = false
 
 [[bench]]
 name = "benchmarks"
