@@ -45,6 +45,7 @@ path = "benches/benchmarks.rs"
 
 [dependencies]
 anyhow = "1.0.94"
+num-bigint = "0.4.6"
 rayon = "1.10.0"
 regex = "1.11.1"
 rustc-hash = "2.1.0"

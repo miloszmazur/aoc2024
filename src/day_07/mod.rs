@@ -2,15 +2,15 @@ use anyhow::{Context, Ok, Result};
 
 #[derive(Debug, Eq, PartialEq)]
 enum Operator {
-    Mul,
-    Add,
+    Merge,
 }
 
 impl Operator {
     fn apply(&self, a: i64, b: i64) -> i64 {
         match self {
-            Operator::Mul => a * b,
-            Operator::Add => a + b,
+            Operator::Merge => (a.to_string() + &b.to_string())
+                .parse::<i64>()
+                .expect("tylko bug mnie osądzi"),
         }
     }
 }
@@ -28,22 +28,55 @@ impl Polynomial {
         let calculate = self.solution_inner(acc, cursor);
         let result = calculate == self.expected;
 
-        dbg!("------------");
-        dbg!(&self.parts);
-        dbg!(&self.expected);
-        dbg!(&calculate);
-        dbg!(&result);
+        // dbg!("------------");
+        // dbg!(&self.parts);
+        // dbg!(&self.expected);
+        // dbg!(&calculate);
+        // dbg!(&result);
         Ok(result)
     }
 
     fn solution_inner(&self, acc: i64, cursor: usize) -> i64 {
-        if cursor >= self.parts.len() || acc >= self.expected {
+        if cursor >= self.parts.len() || acc >= self.expected.into() {
             return acc;
         }
         let value = self.parts[cursor];
-        let result = self.solution_inner(acc * value, cursor + 1);
+        let result = self.solution_inner(&acc * value, cursor + 1);
+        if result != self.expected.into() {
+            self.solution_inner(&acc + value, cursor + 1)
+        } else {
+            result
+        }
+    }
+
+    fn has_extended_solution(&self) -> Result<bool> {
+        let acc = self.parts[0].into();
+        let cursor = 1;
+
+        let calculate = self.extended_solution_inner(acc, cursor);
+        let result = calculate == self.expected;
+
+        // dbg!("------------");
+        // dbg!(&self.parts);
+        // dbg!(&self.expected);
+        // dbg!(&calculate);
+        // dbg!(&result);
+        Ok(result)
+    }
+
+    fn extended_solution_inner(&self, acc: i64, cursor: usize) -> i64 {
+        if cursor >= self.parts.len() || acc >= self.expected.into() {
+            return acc;
+        }
+        let value = self.parts[cursor];
+        let result = self.extended_solution_inner(&acc * value, cursor + 1);
         if result != self.expected {
-            self.solution_inner(acc + value, cursor + 1)
+            let result2 = self.extended_solution_inner(&acc + value, cursor + 1);
+            if result2 != self.expected {
+                self.extended_solution_inner(Operator::Merge.apply(acc, value), cursor + 1)
+            } else {
+                result2
+            }
         } else {
             result
         }
@@ -72,7 +105,7 @@ pub fn part1(input: &str) -> Result<i64> {
     let result = polyms
         .iter()
         .filter_map(|polym| {
-            if polym.has_solution().ok()? {
+            if polym.has_solution().unwrap() {
                 Some(polym.expected)
             } else {
                 None
@@ -83,7 +116,18 @@ pub fn part1(input: &str) -> Result<i64> {
 }
 
 pub fn part2(input: &str) -> Result<i64> {
-    Ok(0)
+    let polyms = parse(input)?;
+    let result = polyms
+        .iter()
+        .filter_map(|polym| {
+            if polym.has_extended_solution().unwrap() {
+                Some(polym.expected)
+            } else {
+                None
+            }
+        })
+        .sum();
+    Ok(result)
 }
 
 #[cfg(test)]
