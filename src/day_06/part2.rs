@@ -1,5 +1,7 @@
+use rustc_hash::FxHashSet;
 use anyhow::{Context, Ok, Result};
-use std::{borrow::Borrow, collections::HashSet, fmt};
+use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, IntoParallelRefMutIterator, ParallelIterator};
+use std::{borrow::Borrow, fmt};
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone)]
 enum Direction {
@@ -95,7 +97,7 @@ impl GuardPatrol {
     }
 
     fn check_loop(&mut self) -> bool {
-        let mut visited_positions: HashSet<PositionWithDirection> = HashSet::new();
+        let mut visited_positions: FxHashSet<PositionWithDirection> = FxHashSet::default();
 
         while let Some(next_position) = self.guard_location.add_direction(&self.current_direction) {
             if !self.within_patrol_area(&next_position) {
@@ -103,19 +105,19 @@ impl GuardPatrol {
             }
             let current_location_and_direction =
                 (self.guard_location.clone(), self.current_direction.clone());
-            if visited_positions.contains(&current_location_and_direction) {
-                return true;
-            } else {
-                visited_positions.insert(current_location_and_direction);
-            }
+
             if self.will_collide(&next_position) {
+                if visited_positions.contains(&current_location_and_direction) {
+                    return true;
+                } else {
+                    visited_positions.insert(current_location_and_direction);
+                }
                 self.current_direction = self.current_direction.to_the_right();
                 continue;
             }
-            self.board[self.guard_location.0][self.guard_location.1] = 'X';
             self.guard_location = next_position;
         }
-        self.board[self.guard_location.0][self.guard_location.1] = 'X';
+        // self.board[self.guard_location.0][self.guard_location.1] = 'X';
 
         false
     }
@@ -193,8 +195,8 @@ pub fn part2(input: &str) -> Result<usize> {
         .collect();
 
     let result = all_steps_positions
-        .iter()
-        .filter(|obstacle_position| {
+        .par_iter()
+        .filter(| obstacle_position| {
             let mut new_patrol = initial_patrol.clone();
             new_patrol.add_obstacle(&obstacle_position);
             new_patrol.check_loop()
