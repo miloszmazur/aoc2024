@@ -1,18 +1,14 @@
 use anyhow::{Context, Ok, Result};
+use rayon::prelude::*;
 
-#[derive(Debug, Eq, PartialEq)]
-enum Operator {
-    Merge,
-}
-
-impl Operator {
-    fn apply(&self, a: i64, b: i64) -> i64 {
-        match self {
-            Operator::Merge => (a.to_string() + &b.to_string())
-                .parse::<i64>()
-                .expect("tylko bug mnie osądzi"),
-        }
+fn concatenate(a: i64, b: i64) -> i64 {
+    let mut digits = 0;
+    let mut rest = b;
+    while rest > 0 {
+        digits += 1;
+        rest = rest / 10;
     }
+    a * 10_i64.pow(digits) + b
 }
 
 #[derive(Debug)]
@@ -69,11 +65,11 @@ impl Polynomial {
             return acc;
         }
         let value = self.parts[cursor];
-        let result = self.extended_solution_inner(&acc * value, cursor + 1);
+        let result = self.extended_solution_inner(acc * value, cursor + 1);
         if result != self.expected {
-            let result2 = self.extended_solution_inner(&acc + value, cursor + 1);
+            let result2 = self.extended_solution_inner(acc + value, cursor + 1);
             if result2 != self.expected {
-                self.extended_solution_inner(Operator::Merge.apply(acc, value), cursor + 1)
+                self.extended_solution_inner(concatenate(acc, value), cursor + 1)
             } else {
                 result2
             }
@@ -103,7 +99,7 @@ fn parse(input: &str) -> Result<Vec<Polynomial>> {
 pub fn part1(input: &str) -> Result<i64> {
     let polyms = parse(input)?;
     let result = polyms
-        .iter()
+        .par_iter()
         .filter_map(|polym| {
             if polym.has_solution().unwrap() {
                 Some(polym.expected)
@@ -118,7 +114,7 @@ pub fn part1(input: &str) -> Result<i64> {
 pub fn part2(input: &str) -> Result<i64> {
     let polyms = parse(input)?;
     let result = polyms
-        .iter()
+        .par_iter()
         .filter_map(|polym| {
             if polym.has_extended_solution().unwrap() {
                 Some(polym.expected)
