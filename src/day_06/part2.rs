@@ -1,7 +1,7 @@
-use rustc_hash::FxHashSet;
 use anyhow::{Context, Ok, Result};
-use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, IntoParallelRefMutIterator, ParallelIterator};
-use std::{borrow::Borrow, fmt};
+use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
+use rustc_hash::FxHashSet;
+use std::fmt;
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone)]
 enum Direction {
@@ -196,7 +196,7 @@ pub fn part2(input: &str) -> Result<usize> {
 
     let result = all_steps_positions
         .par_iter()
-        .filter(| obstacle_position| {
+        .filter(|obstacle_position| {
             let mut new_patrol = initial_patrol.clone();
             new_patrol.add_obstacle(&obstacle_position);
             new_patrol.check_loop()
