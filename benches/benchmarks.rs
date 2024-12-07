@@ -1,4 +1,4 @@
-use aoc2024::{day_01, day_02, day_03, day_04, day_05};
+use aoc2024::{day_01, day_02, day_03, day_04, day_05, day_06};
 
 fn main() {
     divan::main();
@@ -52,4 +52,14 @@ fn day_05_part_1() {
 #[divan::bench]
 fn day_05_part_2() {
     day_05::part2(divan::black_box(include_str!("../src/day_05/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_06_part_1() {
+    day_06::part1(divan::black_box(include_str!("../src/day_06/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_06_part_2() {
+    day_06::part2::part2(divan::black_box(include_str!("../src/day_06/input.txt"))).unwrap();
 }

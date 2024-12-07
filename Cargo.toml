@@ -28,6 +28,11 @@ name = "d05"
 path = "src/exec/day_05.rs"
 test = false
 
+[[bin]]
+name = "d06"
+path = "src/exec/day_06.rs"
+test = false
+
 [[bench]]
 name = "benchmarks"
 harness = false
