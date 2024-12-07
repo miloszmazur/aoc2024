@@ -65,7 +65,7 @@ impl Polynomial {
     }
 
     fn extended_solution_inner(&self, acc: i64, cursor: usize) -> i64 {
-        if cursor >= self.parts.len() || acc >= self.expected.into() {
+        if cursor >= self.parts.len() || acc > self.expected {
             return acc;
         }
         let value = self.parts[cursor];
