@@ -44,6 +44,11 @@ name = "d08"
 path = "src/exec/day_08.rs"
 test = false
 
+[[bin]]
+name = "d09"
+path = "src/exec/day_09.rs"
+test = false
+
 [[bench]]
 name = "benchmarks"
 harness = false
