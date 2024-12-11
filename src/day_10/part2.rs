@@ -1,6 +1,5 @@
 use anyhow::Result;
 use std::{collections::VecDeque, ops};
-use rustc_hash::FxHashSet;
 
 #[derive(Copy, Clone, Hash, Eq, PartialEq)]
 struct Point(i64, i64);
