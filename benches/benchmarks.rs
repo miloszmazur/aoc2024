@@ -1,4 +1,6 @@
-use aoc2024::*;
+use aoc2024::{
+    day_01, day_02, day_03, day_04, day_05, day_06, day_07, day_08, day_09, day_10, day_11,
+};
 
 fn main() {
     divan::main();
@@ -85,12 +87,12 @@ fn day_08_part_2() {
 }
 #[divan::bench]
 fn day_09_part_1() {
-    day_09::part1::main(divan::black_box(include_str!("../src/day_08/input.txt"))).unwrap();
+    day_09::part1::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
 }
 
 #[divan::bench]
 fn day_09_part_2() {
-    day_09::part2::main(divan::black_box(include_str!("../src/day_08/input.txt"))).unwrap();
+    day_09::part2::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
 }
 #[divan::bench]
 fn day_10_part_1() {
@@ -100,4 +102,14 @@ fn day_10_part_1() {
 #[divan::bench]
 fn day_10_part_2() {
     day_10::part2::main(divan::black_box(include_str!("../src/day_10/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_11_part_1() {
+    day_11::part1::main(divan::black_box(include_str!("../src/day_11/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_11_part_2() {
+    day_11::part2::main(divan::black_box(include_str!("../src/day_11/input.txt"))).unwrap();
 }
