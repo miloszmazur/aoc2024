@@ -1,21 +1,111 @@
-use anyhow::Result;
+use anyhow::{Context, Result};
+use rustc_hash::FxHashMap;
 
-fn parse(input: &str) -> Result<Vec<i64>> {
-    Ok(Vec::from([0]))
+struct Stones {
+    stones_list: Vec<u64>,
+    cache: FxHashMap<(u64, u8), u64>,
 }
 
-pub fn main(input: &str) -> Result<i64> {
-    Ok(0)
+impl Stones {
+    fn calculate_depth(&mut self, depth: u8) -> u64 {
+        self.stones_list
+            .clone()
+            .into_iter()
+            .map(|val| self.inner_calculate_depth(val, depth))
+            .sum()
+    }
+
+    fn inner_calculate_depth(&mut self, value: u64, depth: u8) -> u64 {
+        if depth == 0 {
+            return 1;
+        }
+        if let Some(cached) = self.cache.get(&(value, depth)) {
+            *cached
+        } else {
+            let value_iter = match value {
+                0 => Vec::from([1]).into_iter(),
+                dupa if (dupa.ilog10() + 1) % 2u32 == 0u32 => {
+                    let digits = dupa.ilog10() + 1;
+                    Vec::from([
+                        dupa / (10u64.pow(digits / 2)),
+                        dupa % (10u64.pow(digits / 2)),
+                    ])
+                    .into_iter()
+                }
+                _ => Vec::from([value * 2024]).into_iter(),
+            };
+
+            let result: u64 = value_iter
+                .map(|val| self.inner_calculate_depth(val, depth - 1))
+                .sum();
+            self.cache.insert((value, depth), result);
+            result
+        }
+    }
+}
+
+fn parse(input: &str) -> Result<Stones> {
+    let list = input
+        .split(" ")
+        .map(|n| {
+            n.trim()
+                .parse::<u64>()
+                .context(format!("failed to parse {n} as a number"))
+        })
+        .collect::<Result<Vec<u64>>>()?;
+    Ok(Stones {
+        stones_list: list,
+        cache: Default::default(),
+    })
+}
+
+pub fn part1_cached(input: &str) -> Result<u64> {
+    let mut stones = parse(input)?;
+    Ok(stones.calculate_depth(25))
+}
+
+pub fn main(input: &str) -> Result<u64> {
+    let mut stones = parse(input)?;
+    Ok(stones.calculate_depth(75))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_p2() {
-        let input = "";
-        let result = main(input);
-        assert_eq!(result.unwrap(), 36);
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn blink_once() {
+            let input = "0 1 10 99 999";
+            let result = parse(input).unwrap().calculate_depth(1);
+            dbg!(&result);
+
+            assert_eq!(result, 7);
+        }
+
+        #[test]
+        fn blink_twice() {
+            let input = "125 17";
+            let result = parse(input).unwrap().calculate_depth(2);
+            dbg!(&result);
+            assert_eq!(result, 4);
+        }
+
+        #[test]
+        fn test_part1() {
+            let input = "125 17";
+            let result = parse(input).unwrap().calculate_depth(25);
+            assert_eq!(result, 55312);
+        }
+
+        #[test]
+        fn test_part2() {
+            let input = "125 17";
+            let result = parse(input).unwrap().calculate_depth(75);
+            assert_eq!(result, 65601038650482);
+        }
     }
 }

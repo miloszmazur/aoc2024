@@ -110,6 +110,11 @@ fn day_11_part_1() {
 }
 
 #[divan::bench]
+fn day_11_part_1_cache() {
+    day_11::part2::part1_cached(divan::black_box(include_str!("../src/day_11/input.txt"))).unwrap();
+}
+
+#[divan::bench]
 fn day_11_part_2() {
     day_11::part2::main(divan::black_box(include_str!("../src/day_11/input.txt"))).unwrap();
 }
