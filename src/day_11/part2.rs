@@ -22,24 +22,17 @@ impl Stones {
         if let Some(cached) = self.cache.get(&(value, depth)) {
             *cached
         } else {
-            let value_iter = match value {
-                0 => Vec::from([1]).into_iter(),
+            let sum = match value {
+                0 => self.inner_calculate_depth(1, depth - 1),
                 dupa if (dupa.ilog10() + 1) % 2u32 == 0u32 => {
                     let digits = dupa.ilog10() + 1;
-                    Vec::from([
-                        dupa / (10u64.pow(digits / 2)),
-                        dupa % (10u64.pow(digits / 2)),
-                    ])
-                    .into_iter()
+                    self.inner_calculate_depth(dupa / (10u64.pow(digits / 2)), depth - 1)
+                        + self.inner_calculate_depth(dupa % (10u64.pow(digits / 2)), depth - 1)
                 }
-                _ => Vec::from([value * 2024]).into_iter(),
+                _ => self.inner_calculate_depth(value * 2024, depth - 1),
             };
-
-            let result: u64 = value_iter
-                .map(|val| self.inner_calculate_depth(val, depth - 1))
-                .sum();
-            self.cache.insert((value, depth), result);
-            result
+            self.cache.insert((value, depth), sum);
+            sum
         }
     }
 }

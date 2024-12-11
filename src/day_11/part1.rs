@@ -15,7 +15,7 @@ impl Iterator for Stones {
             .flat_map(|stone| match stone {
                 0 => Vec::from([1]),
                 dupa if (dupa.ilog10() + 1) % 2u32 == 0u32 => {
-                    let digits = (dupa.ilog10() + 1);
+                    let digits = dupa.ilog10() + 1;
                     Vec::from([
                         dupa / (10i64.pow(digits / 2)),
                         dupa % (10i64.pow(digits / 2)),
