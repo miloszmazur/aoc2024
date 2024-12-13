@@ -53,10 +53,15 @@ test = false
 name = "d10"
 path = "src/exec/day_10.rs"
 test = false
-[[bin]]
 
+[[bin]]
 name = "d11"
 path = "src/exec/day_11.rs"
+test = false
+
+[[bin]]
+name = "d12"
+path = "src/exec/day_12.rs"
 test = false
 
 [[bench]]
