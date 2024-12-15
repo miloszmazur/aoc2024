@@ -127,8 +127,6 @@ impl Area {
         //     self.id, sides, area
         // );
 
-        // dbg!(self.id, area, sides);
-
         area * sides
     }
 
@@ -252,7 +250,6 @@ impl Area {
                 corners as u64
             })
             .inspect(|asd| {
-                // dbg!(asd);
                 let a = asd;
             })
             .sum()

@@ -1,6 +1,7 @@
 #[allow(non_snake_case)]
 use anyhow::Result;
 use nalgebra::matrix;
+use rayon::prelude::*;
 use regex::Regex;
 use std::{ops, u128};
 
@@ -58,10 +59,8 @@ impl ClawMachine {
         let b_times = (mat_a1.determinant() / det_a) as i128;
 
         let result_point = &self.button_a.times(a_times) + &self.button_b.times(b_times);
-        dbg!(a_times, b_times);
 
         if result_point == self.prize {
-            dbg!(a_times, b_times);
             Some((a_times * 3 + b_times) as u128)
         } else {
             None
@@ -89,7 +88,7 @@ fn parse(input: &str) -> Result<Vec<ClawMachine>> {
 pub fn main(input: &str) -> Result<u128> {
     let machines = parse(input)?;
     Ok(machines
-        .into_iter()
+        .into_par_iter()
         .flat_map(|machine| machine.min_tokens_to_reach_prize())
         .sum::<u128>())
 }

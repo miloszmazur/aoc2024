@@ -1,7 +1,7 @@
 #[allow(non_snake_case)]
 use anyhow::Result;
 use regex::Regex;
-use std::{ops, thread::sleep, time::Duration};
+use std::ops;
 
 #[derive(Copy, Clone, Hash, Eq, PartialEq, Debug)]
 pub struct Point(i128, i128);
@@ -90,22 +90,23 @@ pub fn pre_main(
             map[(pos.0 + pos.1 * arena_dims.0) as usize] + 1
     });
 
-    for i in 0..arena_dims.1 {
-        for j in 0..arena_dims.0 {
-            if i == arena_dims.1 / 2 && j == arena_dims.0 / 2 {
-                print!("{seconds}");
-                continue;
-            }
-            if i == arena_dims.1 / 2 || j == arena_dims.0 / 2 {
-                print!(" ");
-                continue;
-            }
-            let asd = map[(i * arena_dims.0 + j) as usize];
-            let asd = if asd == 0 { "." } else { &asd.to_string() };
-            print!("{}", asd)
-        }
-        print!("\n");
-    }
+    // for i in 0..arena_dims.1 {
+    //     for j in 0..arena_dims.0 {
+    //         if i == arena_dims.1 / 2 && j == arena_dims.0 / 2 {
+    //             print!("{seconds}");
+    //             continue;
+    //         }
+    //         if i == arena_dims.1 / 2 || j == arena_dims.0 / 2 {
+    //             print!(" ");
+    //             continue;
+    //         }
+    //         let asd = map[(i * arena_dims.0 + j) as usize];
+    //         let asd = if asd == 0 { "." } else { &asd.to_string() };
+    //         print!("{}", asd)
+    //     }
+    //     print!("\n");
+    // }
+
     let quadrants = robot_positions
         .into_iter()
         .fold([0_u64; 4], |mut acc, robot_pos| {
@@ -128,7 +129,6 @@ pub fn pre_main(
             }
             acc
         });
-    // dbg!(&quadrants);
 
     Ok(quadrants.iter().product())
 }

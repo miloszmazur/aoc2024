@@ -74,7 +74,6 @@ mod tests {
         fn blink_once() {
             let input = "0 1 10 99 999";
             let result = parse(input).unwrap().calculate_depth(1);
-            dbg!(&result);
 
             assert_eq!(result, 7);
         }
@@ -83,7 +82,6 @@ mod tests {
         fn blink_twice() {
             let input = "125 17";
             let result = parse(input).unwrap().calculate_depth(2);
-            dbg!(&result);
             assert_eq!(result, 4);
         }
 

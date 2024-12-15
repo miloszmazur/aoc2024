@@ -107,7 +107,6 @@ pub fn main(input: &str) -> Result<i64> {
         .iter()
         .map(|trailhead| mapp.num_paths_to_peaks(trailhead))
         .sum();
-    dbg!(&result);
     Ok(result)
 }
 

@@ -83,15 +83,16 @@ fn day_08_part_1() {
 fn day_08_part_2() {
     day_08::part2::main(divan::black_box(include_str!("../src/day_08/input.txt"))).unwrap();
 }
-#[divan::bench]
-fn day_09_part_1() {
-    day_09::part1::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
-}
+// #[divan::bench]
+// fn day_09_part_1() {
+//     day_09::part1::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
+// }
 
-#[divan::bench]
-fn day_09_part_2() {
-    day_09::part2::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
-}
+// #[divan::bench]
+// fn day_09_part_2() {
+//     day_09::part2::main(divan::black_box(include_str!("../src/day_09/input.txt"))).unwrap();
+// }
+
 #[divan::bench]
 fn day_10_part_1() {
     day_10::part1::main(divan::black_box(include_str!("../src/day_10/input.txt"))).unwrap();
@@ -135,4 +136,19 @@ fn day_13_part_1() {
 #[divan::bench]
 fn day_13_part_2() {
     day_13::part2::main(divan::black_box(include_str!("../src/day_13/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_14_part_1() {
+    day_14::part1::main(
+        divan::black_box(include_str!("../src/day_14/input.txt")),
+        divan::black_box(101),
+        divan::black_box(103),
+    )
+    .unwrap();
+}
+
+#[divan::bench]
+fn day_15_part_1() {
+    day_15::part1::main(divan::black_box(include_str!("../src/day_15/input.txt"))).unwrap();
 }

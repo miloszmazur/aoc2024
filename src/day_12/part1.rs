@@ -73,20 +73,19 @@ impl Map {
         pointz.push_back(p0);
 
         while let Some(point) = pointz.pop_back() {
-            if !self.within_map(&point) || self.get_crop_id(&point) != id || self.visited[point.1 as usize][point.0 as usize] {
-                continue
+            if !self.within_map(&point)
+                || self.get_crop_id(&point) != id
+                || self.visited[point.1 as usize][point.0 as usize]
+            {
+                continue;
             }
             let neighbours = point.neighbours();
             members.push(point);
             pointz.extend(neighbours);
             self.visited[point.1 as usize][point.0 as usize] = true;
-
         }
 
-        Area {
-            id,
-            members
-        }
+        Area { id, members }
     }
 }
 
@@ -132,13 +131,8 @@ impl Area {
 
 pub fn main(input: &str) -> Result<u64> {
     let mut mapp = parse(input)?;
-    let areas = mapp
-        .get_all_areas();
-    // dbg!(&areas);
-    Ok(areas
-        .iter()
-        .map(|area| area.price(&mapp))
-        .sum())
+    let areas = mapp.get_all_areas();
+    Ok(areas.iter().map(|area| area.price(&mapp)).sum())
 }
 
 // #[cfg(test)]
