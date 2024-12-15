@@ -1,6 +1,4 @@
-use aoc2024::{
-    day_01, day_02, day_03, day_04, day_05, day_06, day_07, day_08, day_09, day_10, day_11,
-};
+use aoc2024::*;
 
 fn main() {
     divan::main();
@@ -117,4 +115,24 @@ fn day_11_part_1_cache() {
 #[divan::bench]
 fn day_11_part_2() {
     day_11::part2::main(divan::black_box(include_str!("../src/day_11/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_12_part_1() {
+    day_12::part1::main(divan::black_box(include_str!("../src/day_12/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_12_part_2() {
+    day_12::part2::main(divan::black_box(include_str!("../src/day_12/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_13_part_1() {
+    day_13::part1::main(divan::black_box(include_str!("../src/day_13/input.txt"))).unwrap();
+}
+
+#[divan::bench]
+fn day_13_part_2() {
+    day_13::part2::main(divan::black_box(include_str!("../src/day_13/input.txt"))).unwrap();
 }
