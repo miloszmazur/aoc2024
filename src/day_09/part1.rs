@@ -64,6 +64,7 @@ impl Iterator for BlockSpaceIter {
 
 fn parse(input: &str) -> Result<Vec<i64>> {
     Ok(input
+        .trim()
         .chars()
         .map(|charmander| {
             charmander
@@ -75,8 +76,8 @@ fn parse(input: &str) -> Result<Vec<i64>> {
 }
 
 pub fn main(input: &str) -> Result<i64> {
-    let fragged_disk = parse(input);
-    let defragged_disk = defrag(fragged_disk?)?;
+    let fragged_disk = parse(input)?;
+    let defragged_disk = defrag(fragged_disk)?;
     Ok(defragged_disk
         .into_iter()
         .enumerate()

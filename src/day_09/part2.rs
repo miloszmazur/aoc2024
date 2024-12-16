@@ -80,6 +80,7 @@ impl Disk {
 
 fn parse(input: &str) -> Result<Disk> {
     let disk_content = input
+        .trim()
         .chars()
         .enumerate()
         .map(|(index, charmander)| {
@@ -103,12 +104,12 @@ fn parse(input: &str) -> Result<Disk> {
 
 pub fn main(input: &str) -> Result<usize> {
     let mut fragged_disk = parse(input)?;
-    let before_defrag_string = fragged_disk.to_defrag_string();
-    dbg!(&before_defrag_string);
+    // let before_defrag_string = fragged_disk.to_defrag_string();
+    // dbg!(&before_defrag_string);
     fragged_disk.defrag2();
 
-    let after_defrag_string = fragged_disk.to_defrag_string();
-    dbg!(&after_defrag_string);
+    // let after_defrag_string = fragged_disk.to_defrag_string();
+    // dbg!(&after_defrag_string);
 
     Ok(fragged_disk
         .content
